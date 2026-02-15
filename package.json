@@ -2,6 +2,12 @@
   "name": "kayorama-autopilot",
   "displayName": "Kayorama Autopilot",
   "description": "Automatically accept AI code suggestions from GitHub Copilot, Supermaven, and Chat. Features Native Mode (Zero-Config) and Pro CDP Mode.",
+  "publisher": "Kayorama",
+  "version": "8.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kaygaaf/KayoAutopilot.git"
+  },
   "keywords": [
     "ai",
     "automation",
