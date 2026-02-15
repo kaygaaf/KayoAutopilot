@@ -56,7 +56,7 @@ For power users, the **CDP Engine (Chrome DevTools Protocol)** pierces through V
 
 **macOS / Linux:**
 ```bash
-code --remote-debugging-port=9000
+open -n -a "Antigravity" --args --remote-debugging-port=9000
 ```
 
 **Windows:**
