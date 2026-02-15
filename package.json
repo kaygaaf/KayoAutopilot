@@ -1,22 +1,22 @@
 {
   "name": "kayorama-autopilot",
   "displayName": "Kayorama Autopilot",
-  "description": "Automated AI Code Acceptance for VS Code using Chrome DevTools Protocol.",
-  "version": "8.1.0",
-  "publisher": "Kayorama",
-  "icon": "icon.png",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kayorama/kayorama-autopilot"
-  },
+  "description": "Automatically accept AI code suggestions from GitHub Copilot, Supermaven, and Chat. Features Native Mode (Zero-Config) and Pro CDP Mode.",
   "keywords": [
     "ai",
     "automation",
     "copilot",
+    "github copilot",
+    "supermaven",
+    "chat",
     "auto-accept",
     "ghost text",
-    "inline completion"
+    "inline completion",
+    "suggestion",
+    "productivity",
+    "coding assistant",
+    "workflow",
+    "accept all"
   ],
   "engines": {
     "vscode": "^1.75.0"

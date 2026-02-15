@@ -1,53 +1,76 @@
 # Kayorama Autopilot
-> **Automated Code Acceptance for VS Code**
+> **The Ultimate AI Code Acceptance Tool for VS Code**
 
-![Version](https://img.shields.io/visual-studio-marketplace/v/Kayorama.kayorama-autopilot?style=flat-square&color=blue)
-![Installs](https://img.shields.io/visual-studio-marketplace/i/Kayorama.kayorama-autopilot?style=flat-square&color=blue)
-![Rating](https://img.shields.io/visual-studio-marketplace/r/Kayorama.kayorama-autopilot?style=flat-square&color=blue)
+[![Version](https://img.shields.io/visual-studio-marketplace/v/Kayorama.kayorama-autopilot?style=flat-square&color=blue)](https://marketplace.visualstudio.com/items?itemName=Kayorama.kayorama-autopilot)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/Kayorama.kayorama-autopilot?style=flat-square&color=blue)](https://marketplace.visualstudio.com/items?itemName=Kayorama.kayorama-autopilot)
+[![Rating](https://img.shields.io/visual-studio-marketplace/r/Kayorama.kayorama-autopilot?style=flat-square&color=blue)](https://marketplace.visualstudio.com/items?itemName=Kayorama.kayorama-autopilot)
 
 <a href="https://ko-fi.com/kayorama" target="_blank">
   <img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" alt="Buy Me a Coffee at ko-fi.com" height="36" style="border:0px;height:36px;">
 </a>
 
-**Autopilot** bridges the gap between *suggestion* and *action*.
+## ⚡️ Transform Your AI Workflow
+**Stop clicking "Accept". Start coding.**
 
-Designed for **GitHub Copilot**, **Supermaven**, and **custom AI workflows**, it detects "Accept" buttons in the UI and triggers them instantly. It transforms your coding flow from "Review → Click → Continue" to simply "Review → Continue".
+Kayorama Autopilot is the missing link between your AI assistant and your code editor. It automatically detects and accepts code suggestions, chat responses, and refactoring previews, allowing you to stay in the flow.
+
+**Compatible with:**
+*   ✅ **GitHub Copilot** (Inline & Chat)
+*   ✅ **Supermaven**
+*   ✅ **VS Code Native Chat**
+*   ✅ **Refactoring Previews**
 
 ---
 
-## ⚡️ Features
+## 🌟 Key Features
 
-*   **Zero-UI Interaction:** Automatically clicks "Accept", "Accept all", and "Apply" buttons in Chat and Inline libraries.
-*   **CDP Engine (v8.0+):** Uses Chrome DevTools Protocol to "pierce" through VS Code's internal iframes and webviews.
-*   **Smart Recognition:**
-    *   **Text Analysis:** Prioritizes exact matches like "Accept all".
-    *   **Context Awareness:** Ignores status bars, tabs, and non-clickable text.
-    *   **Shadow Hunter:** Recursively scans Shadow DOMs to find buttons hidden deep in extension UIs.
-*   **Safety Guards:** Built-in blacklists prevent accidental clicks on destructive actions (Delete, Cancel, Discard).
+### 1. **Zero-UI Interaction (Native Mode)**
+Out of the box, Autopilot hooks into VS Code's native command system to automatically trigger "Accept" actions for:
+*   Inline Completions (`Tab`)
+*   Chat Responses (`Insert`)
+*   Refactoring Previews (`Apply`)
 
-## 🚀 Setup
-**Option 1: Native Mode (Easiest)**
-Just install the extension. It will attempt to use internal VS Code commands to accept suggestions.
-*Note: This mode is less precise but requires no configuration.*
+### 2. **Deep DOM Inspection (Pro Mode)**
+For power users, the **CDP Engine (Chrome DevTools Protocol)** pierces through VS Code's internal Iframes and Webviews to find and click buttons that the native API can't reach.
+*   **"Accept all"** buttons in complex Chat interfaces.
+*   **"Apply"** buttons in propriety extension sidebars.
+*   **Green Flash:** Visual confirmation when a button is clicked.
 
-**Option 2: Pro Mode (Recommended)**
-For 100% reliability and visual feedback (Green Flash), launch VS Code with the debug port:
+### 3. **Smart Safety System**
+*   **Text Recognition:** Prioritizes exact matches like `"Accept all"`, `"Apply"`, `"Insert"`.
+*   **Blacklist Protection:** actively avoids destructive text like `"Delete"`, `"Discard"`, `"Cancel"`.
+*   **Context Awareness:** Ignores non-clickable status bars and tabs.
 
-**macOS / Linux**
+---
+
+## 🚀 Getting Started
+
+### **Mode A: Native (Plug & Play)**
+**Best for:** Most users, GitHub Copilot.
+1.  Install the extension.
+2.  That's it! Autopilot will now try to accept suggestions automatically using internal commands.
+
+### **Mode B: Pro (CDP Enhanced)**
+**Best for:** Complex agents, Chat windows, "Accept All" buttons.
+*Requires launching VS Code with a special flag.*
+
+**macOS / Linux:**
 ```bash
 code --remote-debugging-port=9000
 ```
 
-**Windows**
+**Windows:**
 ```powershell
 code --remote-debugging-port=9000
 ```
 
-**2. Verify Connection**
-Look at the Status Bar in the bottom right corner:
-*   `$(check) Auto: ON (CDP: 1)` — **Connected.** Ready to accept.
-*   `Auto: ON (CDP: 0)` — **Disconnected.** Did you use the launch flag?
-*   `$(circle-slash) Auto: OFF` — **Paused.** Click to toggle.
+**Verify Connection:**
+Look at the Status Bar (Bottom Right):
+*   `$(check) Auto: ON (CDP: 1)` — **Connected & Empowered.**
+*   `Auto: ON (CDP: 0)` — **Native Mode Only.**
+*   `$(circle-slash) Auto: OFF` — **Paused.**
+
+---
 
 ## ⚙️ Configuration
 
@@ -57,18 +80,15 @@ Look at the Status Bar in the bottom right corner:
 
 ## 🔧 Troubleshooting
 
-**"It says CDP: 0"**
-*   Ensure you launched VS Code from the terminal with `--remote-debugging-port=9000`.
-*   **macOS Users:** You must fully quit VS Code (`Cmd+Q`) before launching from the terminal for the flag to take effect.
+**"It's not clicking in Chat"**
+*   Ensure you are using **Pro Mode** (CDP). Chat windows are often inside Iframes which native commands struggle to reach.
+*   Check the Output log: `View > Output > Kayorama Autopilot`.
 
-**"It's not clicking"**
-1.  **Visibility:** The button must be visible on screen. Autopilot mimics a user click.
-2.  **Inspector:** Run the command `Kayorama: Inspect DOM`. This will log all visible targets to the Output panel.
-3.  **Logs:** Check the "Output" tab -> "Kayorama Autopilot" for details.
+**"It says CDP: 0"**
+*   This means you are running in **Native Mode**. It will still work for basic inline suggestions, but advanced button clicking is disabled.
+*   To fix, restart VS Code with the `--remote-debugging-port=9000` flag.
 
 ---
-
-
 
 <p align="left">
   <img src="https://img.shields.io/badge/Made_by-Kayorama-black?style=for-the-badge" alt="Made by Kayorama">
