@@ -1,0 +1,12 @@
+.vscodeignore
+.gitignore
+.git/
+src/
+tsconfig.json
+full_prompt.txt
+agent_test.txt
+*_commands.json
+*.log
+node_modules/
+!node_modules/ws/
+!node_modules/@types/ws/

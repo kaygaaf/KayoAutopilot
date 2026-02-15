@@ -1,0 +1,69 @@
+{
+  "name": "kayorama-autopilot",
+  "displayName": "Kayorama Autopilot",
+  "description": "Automated AI Code Acceptance for VS Code using Chrome DevTools Protocol.",
+  "version": "8.0.0",
+  "publisher": "Kayorama",
+  "icon": "icon.png",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kayorama/kayorama-autopilot"
+  },
+  "keywords": [
+    "ai",
+    "automation",
+    "copilot",
+    "auto-accept",
+    "ghost text",
+    "inline completion"
+  ],
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "kayorama.toggle",
+        "title": "Kayorama: Toggle Autopilot"
+      },
+      {
+        "command": "kayorama.inspectDOM",
+        "title": "Kayorama: Inspect DOM (Debug)"
+      }
+    ],
+    "configuration": {
+      "title": "Kayorama Autopilot",
+      "properties": {
+        "kayorama.cdpPort": {
+          "type": "number",
+          "default": 9000,
+          "description": "Port to connect to VS Code's Chrome DevTools Protocol. (Launch VS Code with --remote-debugging-port=9000)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.2.5",
+    "@types/vscode": "^1.75.0",
+    "@types/ws": "^8.18.1",
+    "@vscode/vsce": "^2.19.0",
+    "typescript": "^5.1.3"
+  }
+}
