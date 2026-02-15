@@ -49,7 +49,7 @@ const RECONNECT_MS = 5000;
 
 export function activate(context: vscode.ExtensionContext) {
     initLogPath();
-    outputChannel.appendLine('Kayorama Autopilot: Initializing (v8.0.0 - Robust Clicker)...');
+    outputChannel.appendLine('Kayorama Autopilot: Initializing (v8.1.0 - Native + CDP)...');
     if (logFilePath) log(`Logging to: ${logFilePath}`);
 
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
@@ -62,7 +62,17 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         vscode.commands.registerCommand('kayorama.toggle', toggleAutopilot),
         vscode.commands.registerCommand('kayorama.inspectDOM', inspectDOM),
-        vscode.commands.registerCommand('kayorama.dumpDiagnostics', dumpDiagnostics)
+        vscode.commands.registerCommand('kayorama.dumpDiagnostics', dumpDiagnostics),
+        vscode.commands.registerCommand('kayorama.dumpCommands', async () => {
+            const cmds = await vscode.commands.getCommands(true);
+            const fs = require('fs');
+            const path = require('path');
+            if (vscode.workspace.workspaceFolders) {
+                const dest = path.join(vscode.workspace.workspaceFolders[0].uri.fsPath, 'commands_dump.json');
+                fs.writeFileSync(dest, JSON.stringify(cmds.sort(), null, 2));
+                vscode.window.showInformationMessage(`Commands dumped to ${dest}`);
+            }
+        })
     );
 
     log('Kayorama Autopilot: Ready.');
@@ -276,13 +286,27 @@ async function executeCDPClickStrategy() {
 
 async function executeCommandFallbackStrategy() {
     const fallbackCommands = [
-        'workbench.action.refactorPreview.apply',
-        'editor.action.inlineSuggest.commit',
+        'antigravity.command.accept', // High probability for User's Agent
+        'antigravity.agent.acceptAgentStep',
+        'antigravity.prioritized.agentAcceptAllInFile',
+        'inlineChat.acceptChanges', // Standard Chat
+        'editor.action.inlineSuggest.commit', // Standard Copilot
         'interactive.acceptChanges',
+        'workbench.action.terminal.chat.runCommand',
         'workbench.action.acceptRefactoring'
     ];
+
+    // We cycle through them. 
+    // Note: We don't log every attempt to avoid spamming the output, 
+    // unless we want to debug.
+
+    // log('Native Fallback: Attempting native accept commands...');
     for (const cmd of fallbackCommands) {
-        vscode.commands.executeCommand(cmd).then(undefined, () => { });
+        try {
+            await vscode.commands.executeCommand(cmd);
+        } catch (e) {
+            // Ignore errors (command might not be enabled in current context)
+        }
     }
 }
 

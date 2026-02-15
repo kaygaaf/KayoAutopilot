@@ -2,7 +2,7 @@
   "name": "kayorama-autopilot",
   "displayName": "Kayorama Autopilot",
   "description": "Automated AI Code Acceptance for VS Code using Chrome DevTools Protocol.",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "publisher": "Kayorama",
   "icon": "icon.png",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -34,6 +34,14 @@
       {
         "command": "kayorama.toggle",
         "title": "Kayorama: Toggle Autopilot"
+      },
+      {
+        "command": "kayorama.dumpDiagnostics",
+        "title": "Kayorama: Dump Diagnostics"
+      },
+      {
+        "command": "kayorama.dumpCommands",
+        "title": "Kayorama: Dump All Commands"
       },
       {
         "command": "kayorama.inspectDOM",

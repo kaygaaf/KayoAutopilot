@@ -26,9 +26,12 @@ Designed for **GitHub Copilot**, **Supermaven**, and **custom AI workflows**, it
 *   **Safety Guards:** Built-in blacklists prevent accidental clicks on destructive actions (Delete, Cancel, Discard).
 
 ## 🚀 Setup
+**Option 1: Native Mode (Easiest)**
+Just install the extension. It will attempt to use internal VS Code commands to accept suggestions.
+*Note: This mode is less precise but requires no configuration.*
 
-**1. Launch VS Code with Debugging Enabled**
-Autopilot requires access to the VS Code DOM via the remote debugging port. This is a one-time setup:
+**Option 2: Pro Mode (Recommended)**
+For 100% reliability and visual feedback (Green Flash), launch VS Code with the debug port:
 
 **macOS / Linux**
 ```bash
